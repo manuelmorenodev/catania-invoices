@@ -25,7 +25,14 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
       HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_ADMIN_SECRET:-hasura}"
       HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256", "key": "${HASURA_JWT_SECRET:-h2leOvdgjwpV0As5L8rZlV3VDVOsOmwk}"}'
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "anonymous"
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "admin"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_DEV_MODE: "true"
 
+  app:
+    build:
+      context: src/app
+    ports:
+      - 80:3000
+    volumes:
+      - ./src/app:/app:delegate
