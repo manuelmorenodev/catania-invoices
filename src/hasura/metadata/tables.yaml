@@ -1,3 +1,9 @@
 - table:
     schema: public
+    name: invoices
+- table:
+    schema: public
+    name: invoices_lines
+- table:
+    schema: public
     name: users
