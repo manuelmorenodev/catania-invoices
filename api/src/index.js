@@ -4,28 +4,28 @@ const fastify = require("@forrestjs/service-fastify");
 const apollo = require("@forrestjs/service-apollo");
 const fastifyHealthz = require("@forrestjs/service-fastify-healthz");
 
-const homeFeature = require('./features/home')
+const homeFeature = require('./features/home');
+const usersFeature = require("./features/users");
 
-// const validatedEnv = envalid.cleanEnv({
-//     HASURA_ENDPOINT: envalid.str({
-//         desc: 'hola?'
-//     }),
-//     FASTIFY_PORT: envalid.num({
-//         default: 4000
-//     })
-// })
+const validatedEnv = envalid.cleanEnv(process.env, {
+    HASURA_ENDPOINT: envalid.str({
+        default: 'http://hasura:8080/v1/graphql'
+    }),
+    FASTIFY_PORT: envalid.num({
+        default: 4000
+    })
+})
 
 runHookApp({
     trace: "compact",
     settings: {
         fastify: {
-            port: 4000
+            port: validatedEnv.FASTIFY_PORT
         },
         apollo: {
             client: {
                 config: {
-                    uri: 'http://hasura:8080/v1/graphql'
-                    // uri: validatedEnv.HASURA_ENDPOINT
+                    uri: validatedEnv.HASURA_ENDPOINT
                 }
             }
         }
@@ -36,6 +36,7 @@ runHookApp({
         fastifyHealthz
     ],
     features: [
-        homeFeature
+        homeFeature,
+        usersFeature,
     ]
 }).catch(console.error)
