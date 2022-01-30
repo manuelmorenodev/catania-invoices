@@ -4,12 +4,13 @@ import {
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import 'bootstrap/dist/css/bootstrap.css'
 import './index.css';
 
 const client = new ApolloClient({
-  uri: 'http://hasura:8080/v1/graphql',
+  uri: 'http://localhost:8080/v1/graphql',
   cache: new InMemoryCache()
-});
+})
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,4 +19,4 @@ ReactDOM.render(
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
-);
+)

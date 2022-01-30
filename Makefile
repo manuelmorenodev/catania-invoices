@@ -9,10 +9,10 @@ build:
 	docker-compose build --no-cache
 
 hasura:
-	cd src/hasura && hasura console
+	cd hasura && hasura console
 
 migrate:
-	cd src/hasura && hasura migrate apply && hasura metadata apply
+	cd hasura && hasura migrate apply && hasura metadata apply
 
 seed:
-	cd src/hasura && hasura seed apply
+	cd hasura && hasura seed apply
