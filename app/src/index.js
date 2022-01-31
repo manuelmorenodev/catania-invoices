@@ -25,7 +25,8 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="invoices" element={<Invoices />}>
+            <Route path="invoices">
+              <Route index element={<Invoices />} />
               <Route path="new" element={<Invoice />} />
             </Route>
           </Route>
