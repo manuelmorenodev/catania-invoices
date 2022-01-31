@@ -19,10 +19,3 @@
 - table:
     schema: public
     name: invoices_lines
-  object_relationships:
-  - name: invoice
-    using:
-      foreign_key_constraint_on: invoice_id
-- table:
-    schema: public
-    name: users

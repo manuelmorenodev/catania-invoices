@@ -37,6 +37,8 @@ services:
       - 3000:3000 # live reload
     volumes:
       - ./app:/app:delegate
+    environment:
+      REACT_APP_HASURA_URL: http://localhost:8080=value
 
   api:
     build:
