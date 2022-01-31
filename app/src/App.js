@@ -1,15 +1,10 @@
-import UserList from "./users/UserList";
+import { Link, Outlet } from "react-router-dom";
+import Dashboard from "./layout/Dashboard";
 
 function App() {
   return (
     <div className="App">
-      <div className="container" style={{paddingTop: 40}}>
-        <div className="row">
-          <div className="col-md-4">
-            <UserList />
-          </div>
-        </div>
-      </div>
+      <Dashboard />
     </div>
   );
 }
