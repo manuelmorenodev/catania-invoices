@@ -20,7 +20,7 @@ export const Invoices = () => {
     }
 
     return data.invoices.map(invoice => (
-        <div>
+        <div key={invoice.id}>
             <div>
                 <span>{invoice.id}: </span>
                 <span>{invoice.customer.name}</span>

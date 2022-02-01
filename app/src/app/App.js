@@ -1,24 +1,14 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { useGetContext } from "@forrestjs/react-root";
 import { AppBar, Box, Button, Paper, Stack, Toolbar } from "@mui/material";
-import CssBaseline from '@mui/material/CssBaseline';
 import { Link, Route, Routes } from "react-router-dom";
 import { HomePage } from "./HomePage";
 
-
-
-const client = new ApolloClient({
-  uri: 'http://localhost:8080/v1/graphql',
-  cache: new InMemoryCache()
-})
-
 export const App = () => {
+  
   const routes = useGetContext("app.routes");
-  console.log(routes);
+
   return (
-    <ApolloProvider client={client}>
-      <CssBaseline />
-      <Box sx={{ height: '100vh' }}>
+    <Box sx={{ height: '100vh' }}>
         <AppBar position="relative">
           <Toolbar>
             <Stack spacing={2} direction="row">
@@ -41,6 +31,5 @@ export const App = () => {
           </Routes>
         </Paper>
       </Box>
-    </ApolloProvider>
   );
 };
