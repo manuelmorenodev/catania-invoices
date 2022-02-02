@@ -1,19 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
-
-const QUERY_INVOICES = gql`
-    query GetInvoices {
-        invoices {
-            id
-            customer {
-                name
-            }
-        }
-    }
-`
+import { useInvoices } from "./hooks/use-invoices";
 
 export const Invoices = () => {
 
-    const { data } = useQuery(QUERY_INVOICES)
+    const data = useInvoices()
 
     if (!data) {
         return 'Loading...'

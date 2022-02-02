@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 const QUERY_INVOICES = gql`
     query GetInvoices {
@@ -20,5 +20,4 @@ export const useInvoices = () => {
         loading,
         error
     }
-
 }
