@@ -31,7 +31,7 @@ export const useInvoices = () => {
 
             let invoices = []
 
-            data.invoices.forEach(({id, date, customer, lines}) => {
+            data.invoices.forEach(({ id, date, customer, lines }) => {
 
                 let invoice = {
                     id,
@@ -40,7 +40,7 @@ export const useInvoices = () => {
                         name: customer.name
                     }
                 }
-                
+
                 invoices.push(invoice)
             })
 
