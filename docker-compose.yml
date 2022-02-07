@@ -29,24 +29,25 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_DEV_MODE: "true"
 
-  app:
-    build:
-      context: app
-    ports:
-      - 80:3000 # browser
-      - 3000:3000 # live reload
-    volumes:
-      - ./app:/app:delegate
-    environment:
-      - REACT_APP_HASURA_ENDPOINT=http://localhost:8080/v1/graphql
+  # app:
+  #   image: node:16
+  #   # build:
+  #   #   context: app
+  #   ports:
+  #     # - 80:3000 # browser
+  #     - 3000:3000 # live reload
+  #   volumes:
+  #     - ./app:/app:delegated
+  #   environment:
+  #     - REACT_APP_HASURA_ENDPOINT=http://localhost:${HASURA_PORT:-8080}/v1/graphql
 
-  api:
-    build:
-      context: api
-    ports:
-      - 4000:4000
-    volumes:
-      - ./api:/api:delegated
-    environment:
-      - HASURA_ENDPOINT=http://hasura:8080/v1/graphql
-      - FASTIFY_PORT=4000
+  # api:
+  #   build:
+  #     context: api
+  #   ports:
+  #     - 4000:4000
+  #   volumes:
+  #     - ./api:/api:delegated
+  #   environment:
+  #     - HASURA_ENDPOINT=http://hasura:${HASURA_PORT:-8080}/v1/graphql
+  #     - FASTIFY_PORT=4000

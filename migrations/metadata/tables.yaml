@@ -1,0 +1,9 @@
+- table:
+    schema: public
+    name: customers
+- table:
+    schema: public
+    name: invoices
+- table:
+    schema: public
+    name: invoices_lines

@@ -1,4 +1,4 @@
-CREATE TABLE "public"."customers" ("id" serial NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "name" text, "email" text, "address" text, PRIMARY KEY ("id") );
+CREATE TABLE "public"."customers" ("id" serial NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "email" Text NOT NULL, "name" Text, "birth" date, "country" text, "region" Text, "city" Text, "address" text, "postal_code" text, "phone" text, "password" text, PRIMARY KEY ("id") , UNIQUE ("email"));
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
 RETURNS TRIGGER AS $$
 DECLARE

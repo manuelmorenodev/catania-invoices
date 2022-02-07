@@ -5,18 +5,19 @@ import reactRouter from "@forrestjs/react-router";
 
 import { appFeature } from "./app";
 import { invoicesFeature } from "./invoices";
-import apollo from "./apollo";
+import { apolloService } from "./apollo";
+import { customersFeature } from "./customers";
 
 runHookApp({
   settings: {
     apollo: {
       client: {
         config: {
-          uri: process.env.REACT_APP_HASURA_ENDPOINT
+          uri: process.env.REACT_APP_HASURA_ENDPOINT || 'http://localhost:9876/v1/graphql'
         }
       }
     }
   },
-  services: [reactRoot, reactRouter, reactMUI, apollo],
-  features: [appFeature, invoicesFeature]
+  services: [reactRoot, reactRouter, reactMUI, apolloService],
+  features: [appFeature, invoicesFeature, customersFeature]
 });

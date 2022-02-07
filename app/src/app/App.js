@@ -1,7 +1,12 @@
 import { useGetContext } from "@forrestjs/react-root";
 import { AppBar, Box, Button, Paper, Stack, Toolbar } from "@mui/material";
 import { Link, Route, Routes } from "react-router-dom";
+import { customersPath } from "../customers";
 import { HomePage } from "./HomePage";
+
+// const MenuItem = () => {
+//   return <div></div>;
+// };
 
 export const App = () => {
   
@@ -17,6 +22,9 @@ export const App = () => {
               </Link>
               <Link to="/invoices" style={{ textDecoration: 'none' }}>
                 <Button variant="contained" disableElevation>Invoices</Button>
+              </Link>
+              <Link to={customersPath} style={{ textDecoration: 'none' }}>
+                <Button variant="contained" disableElevation>Customers</Button>
               </Link>
             </Stack>
           </Toolbar>

@@ -1,4 +1,4 @@
-CREATE TABLE "public"."invoices" ("id" serial NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") );
+CREATE TABLE "public"."invoices" ("id" serial NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "customer_id" integer NOT NULL, "number" text, "date" date, "status" integer NOT NULL DEFAULT 0, PRIMARY KEY ("id") , FOREIGN KEY ("customer_id") REFERENCES "public"."customers"("id") ON UPDATE cascade ON DELETE cascade);
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
 RETURNS TRIGGER AS $$
 DECLARE

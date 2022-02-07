@@ -1,4 +1,4 @@
-import { Invoices } from "./Invoices"
+import { Invoices } from "./components/Invoices"
 
 export const invoicesFeature = ({registerAction}) => {
 
