@@ -1,5 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { gql, useQuery } from '@apollo/client'
+import { useEffect, useState } from 'react'
 
 const QUERY_INVOICES = gql`
     query getInvoices {
@@ -20,34 +20,15 @@ const QUERY_INVOICES = gql`
 `
 
 export const useInvoices = () => {
-
     const [invoices, setInvoices] = useState([])
 
     const { data, loading, error } = useQuery(QUERY_INVOICES)
 
     useEffect(() => {
-
         if (data && data.invoices) {
-
-            let invoices = []
-
-            data.invoices.forEach(({ id, date, customer, lines }) => {
-
-                let invoice = {
-                    id,
-                    date,
-                    customer: {
-                        name: customer.name
-                    }
-                }
-
-                invoices.push(invoice)
-            })
-
-            setInvoices(invoices)
-
+            setInvoices(data.invoices)
         }
     }, [data])
 
-    return { invoices, loading, error };
+    return { invoices, loading, error }
 }

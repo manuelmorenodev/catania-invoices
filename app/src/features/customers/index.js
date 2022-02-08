@@ -12,4 +12,12 @@ export const customersFeature = ({registerAction}) => {
         }
     })
 
+    registerAction({
+        hook: 'addMenuItem',
+        handler: {
+            path: customersPath,
+            label: 'Customers'
+        }
+    })
+
 }
