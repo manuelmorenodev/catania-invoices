@@ -1,3 +1,4 @@
+import { Product } from './components/Product'
 import { Products } from './components/Products'
 
 export const productsFeature = ({ registerAction }) => {
@@ -6,6 +7,14 @@ export const productsFeature = ({ registerAction }) => {
         handler: {
             path: '/products',
             element: <Products />,
+        },
+    })
+
+    registerAction({
+        hook: 'addRoute',
+        handler: {
+            path: '/product',
+            element: <Product />,
         },
     })
 
