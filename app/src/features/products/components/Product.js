@@ -1,4 +1,6 @@
+import SaveIcon from '@mui/icons-material/Save'
 import {
+  Fab,
   FormControl,
   Grid,
   InputAdornment,
@@ -6,11 +8,14 @@ import {
   OutlinedInput,
   TextField,
 } from '@mui/material'
+import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FeatureTitle } from '../../../app/components/FeatureTitle'
+import { useProduct } from '../hooks/use-product'
 
-export const Product = () => {
-  const [product, setProduct] = useState({})
+export const Product = ({ id }) => {
+  const { product, setProduct } = useProduct()
 
   const handleChange = ({ target }) => {
     setProduct({ ...product, [target.name]: target.value })
@@ -22,11 +27,16 @@ export const Product = () => {
 
   return (
     <>
-      <FeatureTitle>Product</FeatureTitle>
+      <FeatureTitle>
+        {product.id
+          ? `Update product ${product.ref} - ${product.name}`
+          : 'New product'}
+      </FeatureTitle>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={4}>
           <TextField
             fullWidth
+            required
             name="ref"
             label="Ref."
             value={product.ref ?? ''}
@@ -36,6 +46,7 @@ export const Product = () => {
         <Grid item xs={12} sm={4}>
           <TextField
             fullWidth
+            required
             name="name"
             label="Name"
             value={product.name ?? ''}
@@ -44,9 +55,10 @@ export const Product = () => {
         </Grid>
         <Grid item xs={12} sm={4}>
           <FormControl variant="outlined" fullWidth>
-            <InputLabel>Price</InputLabel>
+            <InputLabel>Price *</InputLabel>
             <OutlinedInput
               fullWidth
+              required
               name="price"
               label="Price"
               value={product.price ?? ''}
@@ -88,6 +100,14 @@ export const Product = () => {
           />
         </Grid>
       </Grid>
+      <Box sx={{ textAlign: 'right', mt: 3 }}>
+        <Link to="/product" style={{ textDecoration: 'none' }}>
+          <Fab variant="extended" color="primary" aria-label="add">
+            <SaveIcon sx={{ mr: 1 }} />
+            Save
+          </Fab>
+        </Link>
+      </Box>
     </>
   )
 }

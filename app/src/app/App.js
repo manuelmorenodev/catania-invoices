@@ -16,8 +16,8 @@ export const App = () => {
   const menuItems = useGetContext('app.menuItems')
 
   return (
-    <Box sx={{ height: '100vh' }}>
-      <AppBar position="relative">
+    <Box sx={{ height: '100vh', pt: 8 }}>
+      <AppBar>
         <Toolbar>
           <Stack spacing={2} direction="row">
             {menuItems.map(item => (
@@ -34,8 +34,8 @@ export const App = () => {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Container>
-        <Paper elevation={1} sx={{ m: 3, py: 2, px: 5 }}>
+      <Container sx={{ pb: 3 }}>
+        <Paper elevation={3} sx={{ m: 3, px: 5, py: 4 }}>
           <Routes>
             {routes.map(route => (
               <Route {...route} key={route.path} />
