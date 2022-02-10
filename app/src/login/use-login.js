@@ -1,12 +1,12 @@
-import { useContext } from "react";
-import { LoginContext } from "./LoginContext";
+import { useContext } from 'react'
+import { LoginContext } from './LoginContext'
 
 export const useLogin = () => {
-  const [user, setUser] = useContext(LoginContext);
+  const [user, setUser] = useContext(LoginContext)
   return {
     user,
     needLogin: !user,
     login: setUser,
-    logout: () => setUser(null)
-  };
-};
+    logout: () => setUser(null),
+  }
+}

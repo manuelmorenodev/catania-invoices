@@ -1,29 +1,25 @@
-import { gql, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { gql, useQuery } from '@apollo/client'
+import { useEffect, useState } from 'react'
 
 const QUERY_CUSTOMERS = gql`
-    query getCustomers {
-        customers {
-            id
-            name
-        }
+  query getCustomers {
+    customers {
+      id
+      name
     }
+  }
 `
 
 export const useCustomers = () => {
+  const [customers, setCustomers] = useState([])
 
-    const [customers, setCustomers] = useState([])
+  const { data, loading, error } = useQuery(QUERY_CUSTOMERS)
 
-    const { data, loading, error } = useQuery(QUERY_CUSTOMERS)
+  useEffect(() => {
+    if (data && data.customers) {
+      setCustomers(data.customers)
+    }
+  }, [data])
 
-    useEffect(() => {
-
-        if (data && data.customers) {
-            setCustomers(data.customers)
-        }
-
-    }, [data])
-
-    return { customers, loading, error }
-
+  return { customers, loading, error }
 }

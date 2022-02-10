@@ -10,15 +10,17 @@ import { apolloService } from './services/apollo'
 import { dateNfsService } from './services/date-nfs'
 
 runHookApp({
-    settings: {
-        apollo: {
-            client: {
-                config: {
-                    uri: process.env.REACT_APP_HASURA_ENDPOINT || 'http://localhost:9876/v1/graphql',
-                },
-            },
+  settings: {
+    apollo: {
+      client: {
+        config: {
+          uri:
+            process.env.REACT_APP_HASURA_ENDPOINT ||
+            'http://localhost:9876/v1/graphql',
         },
+      },
     },
-    services: [reactRoot, reactRouter, reactMUI, apolloService, dateNfsService],
-    features: [appFeature, invoicesFeature, customersFeature, productsFeature],
+  },
+  services: [reactRoot, reactRouter, reactMUI, apolloService, dateNfsService],
+  features: [appFeature, invoicesFeature, customersFeature, productsFeature],
 })
