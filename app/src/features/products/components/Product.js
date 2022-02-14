@@ -13,10 +13,13 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { FeatureTitle } from '../../../app/components/FeatureTitle'
 import { useProduct } from '../hooks/use-product'
+import { useNavigate } from 'react-router-dom'
 
 export const Product = ({ id }) => {
   const params = useParams()
   console.log(params)
+
+  const navigate = useNavigate()
 
   const { product, setProduct, saveProduct, loading, error } = useProduct(
     params.id || undefined
@@ -33,7 +36,10 @@ export const Product = ({ id }) => {
         product.price.toString().replace(/\./g, '').replace(/,/, '.')
       ),
     })
-    saveProduct()
+    const result = saveProduct()
+    if (result) {
+      navigate('/products')
+    }
   }
 
   const formattedPrice = price => {

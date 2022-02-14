@@ -112,10 +112,12 @@ export const useProduct = id => {
   const saveProduct = () => {
     if (product.id) {
       updateProduct({ variables: product })
+      return !updateError
     } else {
       insertProduct({
         variables: product,
       })
+      return !insertError
     }
   }
 
