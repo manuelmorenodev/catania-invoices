@@ -1,13 +1,15 @@
+import AddIcon from '@mui/icons-material/Add'
+import EditIcon from '@mui/icons-material/Edit'
+import { Box, Fab } from '@mui/material'
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid'
 import React from 'react'
-import { DataGrid } from '@mui/x-data-grid'
+import { Link, useNavigate } from 'react-router-dom'
 import { FeatureTitle } from '../../../app/components/FeatureTitle'
 import { useProducts } from '../hooks/use-products'
-import { Box, Fab } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
-import { Link } from 'react-router-dom'
 
 export const Products = () => {
   const { products, loading, error } = useProducts()
+  const navigate = useNavigate()
 
   const columns = [
     {
@@ -36,12 +38,23 @@ export const Products = () => {
       headerName: 'Price',
       type: 'number',
     },
+    {
+      field: 'actions',
+      type: 'actions',
+      width: 50,
+      getActions: item => {
+        return [
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            onClick={() => navigate(`/product/${item.id}`)}
+          />,
+        ]
+      },
+    },
   ]
 
   const errorProp = error ? { error: true } : {}
-  if (error) {
-    console.log(error)
-  }
 
   return (
     <>

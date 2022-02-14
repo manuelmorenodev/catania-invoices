@@ -67,19 +67,15 @@ const MUTATION_INSERT_PRODUCT = gql`
   }
 `
 
-export const useProduct = id => {
+export const useProduct = (id = null) => {
   const [product, setProduct] = useState(PRODUCT_MODEL)
 
-  const { data, loading, error } = useQuery(
-    QUERY_GET_PRODUCT,
-    id
-      ? {
-          variables: {
-            id,
-          },
-        }
-      : null
-  )
+  const { data, loading, error } = useQuery(QUERY_GET_PRODUCT, {
+    skip: !id,
+    variables: {
+      id,
+    },
+  })
 
   const [
     updateProduct,
@@ -100,14 +96,6 @@ export const useProduct = id => {
       setProduct(newProduct)
     }
   }, [data])
-
-  useEffect(() => {
-    console.log('update data', updateData)
-  }, [updateData])
-
-  useEffect(() => {
-    console.log('insert data', insertData)
-  }, [insertData])
 
   const saveProduct = () => {
     if (product.id) {

@@ -17,7 +17,6 @@ import { useNavigate } from 'react-router-dom'
 
 export const Product = ({ id }) => {
   const params = useParams()
-  console.log(params)
 
   const navigate = useNavigate()
 
@@ -36,6 +35,7 @@ export const Product = ({ id }) => {
         product.price.toString().replace(/\./g, '').replace(/,/, '.')
       ),
     })
+
     const result = saveProduct()
     if (result) {
       navigate('/products')
