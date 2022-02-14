@@ -10,27 +10,52 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { FeatureTitle } from '../../../app/components/FeatureTitle'
 import { useProduct } from '../hooks/use-product'
 
 export const Product = ({ id }) => {
-  const { product, setProduct } = useProduct()
+  const params = useParams()
+  console.log(params)
+
+  const { product, setProduct, saveProduct, loading, error } = useProduct(
+    params.id || undefined
+  )
 
   const handleChange = ({ target }) => {
     setProduct({ ...product, [target.name]: target.value })
   }
 
-  useEffect(() => {
-    console.log(product)
-  }, [product])
+  const handleSave = () => {
+    setProduct({
+      ...product,
+      price: parseFloat(
+        product.price.toString().replace(/\./g, '').replace(/,/, '.')
+      ),
+    })
+    saveProduct()
+  }
+
+  const formattedPrice = price => {
+    const num = ('' + price).replace(/\./g, '').replace(/,/, '.')
+
+    const formatted = Intl.NumberFormat('es-ES', {
+      style: 'decimal',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(num)
+
+    return formatted
+  }
+
+  if (error) {
+    return JSON.stringify(error)
+  }
 
   return (
     <>
       <FeatureTitle>
-        {product.id
-          ? `Update product ${product.ref} - ${product.name}`
-          : 'New product'}
+        {product.id ? 'Update product' : 'New product'}
       </FeatureTitle>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={4}>
@@ -101,12 +126,10 @@ export const Product = ({ id }) => {
         </Grid>
       </Grid>
       <Box sx={{ textAlign: 'right', mt: 3 }}>
-        <Link to="/product" style={{ textDecoration: 'none' }}>
-          <Fab variant="extended" color="primary" aria-label="add">
-            <SaveIcon sx={{ mr: 1 }} />
-            Save
-          </Fab>
-        </Link>
+        <Fab onClick={handleSave} variant="extended" color="primary">
+          <SaveIcon sx={{ mr: 1 }} />
+          Save
+        </Fab>
       </Box>
     </>
   )

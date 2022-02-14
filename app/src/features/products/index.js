@@ -13,7 +13,15 @@ export const productsFeature = ({ registerAction }) => {
   registerAction({
     hook: 'addRoute',
     handler: {
-      path: '/product',
+      path: '/product/',
+      element: <Product />,
+    },
+  })
+
+  registerAction({
+    hook: 'addRoute',
+    handler: {
+      path: '/product/:id',
       element: <Product />,
     },
   })

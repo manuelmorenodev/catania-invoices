@@ -34,20 +34,21 @@ services:
     build:
       context: app
     ports:
-      # - 80:3000 # browser
-      - 3000:3000 # live reload
+      - ${APP_PORT}:80 # browser
+      - 3000:80 # live reload
     volumes:
-      - ./app:/app:delegated
+      - ./app:/app
     environment:
+      - PORT=80
       - REACT_APP_HASURA_ENDPOINT=http://localhost:${HASURA_PORT:-8080}/v1/graphql
 
-  # api:
-  #   build:
-  #     context: api
-  #   ports:
-  #     - 4000:4000
-  #   volumes:
-  #     - ./api:/api:delegated
-  #   environment:
-  #     - HASURA_ENDPOINT=http://hasura:${HASURA_PORT:-8080}/v1/graphql
-  #     - FASTIFY_PORT=4000
+  api:
+    build:
+      context: api
+    ports:
+      - 4000:80
+    volumes:
+      - ./api:/api:delegated
+    environment:
+      - HASURA_ENDPOINT=http://hasura:8080/v1/graphql
+      - FASTIFY_PORT=80

@@ -1,4 +1,4 @@
 version: 2
-endpoint: http://localhost:9876
+endpoint: http://localhost:9898
 metadata_directory: metadata
 admin_secret: hasura

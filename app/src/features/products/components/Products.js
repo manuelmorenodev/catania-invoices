@@ -38,7 +38,10 @@ export const Products = () => {
     },
   ]
 
-  const errorProp = error ? { error: error } : {}
+  const errorProp = error ? { error: true } : {}
+  if (error) {
+    console.log(error)
+  }
 
   return (
     <>
