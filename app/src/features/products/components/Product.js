@@ -1,21 +1,14 @@
 import SaveIcon from '@mui/icons-material/Save'
-import {
-  Fab,
-  FormControl,
-  Grid,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from '@mui/material'
+import { Fab, Grid, TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { CurrencyInput } from '../../../app/components/CurrencyInput'
 import { FeatureTitle } from '../../../app/components/FeatureTitle'
+import { parseCurrency } from '../../../utils'
 import { useProduct } from '../hooks/use-product'
-import { useNavigate } from 'react-router-dom'
 
-export const Product = ({ id }) => {
+export const Product = () => {
   const params = useParams()
 
   const navigate = useNavigate()
@@ -29,12 +22,10 @@ export const Product = ({ id }) => {
   }
 
   const handleSave = () => {
-    setProduct({
-      ...product,
-      price: parseFloat(
-        product.price.toString().replace(/\./g, '').replace(/,/, '.')
-      ),
-    })
+    // setProduct({
+    //   ...product,
+    //   price: parseCurrency(product.price),
+    // })
 
     const result = saveProduct()
     if (result) {
@@ -42,17 +33,9 @@ export const Product = ({ id }) => {
     }
   }
 
-  const formattedPrice = price => {
-    const num = ('' + price).replace(/\./g, '').replace(/,/, '.')
-
-    const formatted = Intl.NumberFormat('es-ES', {
-      style: 'decimal',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(num)
-
-    return formatted
-  }
+  useEffect(() => {
+    console.log(product)
+  }, [product])
 
   if (error) {
     return JSON.stringify(error)
@@ -85,39 +68,14 @@ export const Product = ({ id }) => {
           />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel>Price *</InputLabel>
-            <OutlinedInput
-              fullWidth
-              required
-              name="price"
-              label="Price"
-              value={product.price ?? ''}
-              onChange={handleChange}
-              onFocus={({ target }) => {
-                const formatted = target.value.replace(/\./g, '')
-                setProduct({
-                  ...product,
-                  price: formatted !== 'NaN' ? formatted : '',
-                })
-              }}
-              onBlur={({ target }) => {
-                const num = target.value.replace(/\./g, '').replace(/,/, '.')
-
-                const formatted = Intl.NumberFormat('es-ES', {
-                  style: 'decimal',
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                }).format(num)
-
-                setProduct({
-                  ...product,
-                  price: formatted !== 'NaN' ? formatted : '',
-                })
-              }}
-              endAdornment={<InputAdornment position="end">€</InputAdornment>}
-            />
-          </FormControl>
+          <CurrencyInput
+            label="Price *"
+            name="price"
+            value={product.price ?? ''}
+            updateValue={value => {
+              setProduct({ ...product, price: value })
+            }}
+          />
         </Grid>
         <Grid item xs={12}>
           <TextField

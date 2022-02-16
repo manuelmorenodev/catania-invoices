@@ -1,6 +1,7 @@
 import { gql, useMutation } from '@apollo/client'
 import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
+import { parseCurrency } from '../../../utils'
 
 const PRODUCT_MODEL = {
   id: null,
@@ -98,6 +99,9 @@ export const useProduct = (id = null) => {
   }, [data])
 
   const saveProduct = () => {
+    const productToSave = { ...product }
+    productToSave.price = parseCurrency(product.price)
+
     if (product.id) {
       updateProduct({ variables: product })
       return !updateError
