@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 const QUERY_GET_PRODUCTS = gql`
   query GetProducts {
-    products {
+    products(order_by: { id: asc }) {
       id
       ref
       name

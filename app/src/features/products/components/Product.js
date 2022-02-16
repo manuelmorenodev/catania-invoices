@@ -3,9 +3,8 @@ import { Fab, Grid, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { CurrencyInput } from '../../../app/components/CurrencyInput'
+import { CurrencyField } from '../../../app/components/CurrencyField'
 import { FeatureTitle } from '../../../app/components/FeatureTitle'
-import { parseCurrency } from '../../../utils'
 import { useProduct } from '../hooks/use-product'
 
 export const Product = () => {
@@ -22,11 +21,6 @@ export const Product = () => {
   }
 
   const handleSave = () => {
-    // setProduct({
-    //   ...product,
-    //   price: parseCurrency(product.price),
-    // })
-
     const result = saveProduct()
     if (result) {
       navigate('/products')
@@ -68,7 +62,7 @@ export const Product = () => {
           />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <CurrencyInput
+          <CurrencyField
             label="Price *"
             name="price"
             value={product.price ?? ''}

@@ -7,7 +7,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { parseCurrency, formatCurrency } from '../../utils'
 
-export const CurrencyInput = props => {
+export const CurrencyField = props => {
   const [value, setValue] = useState('')
 
   const handleFocus = ({ target }) => {
@@ -24,6 +24,12 @@ export const CurrencyInput = props => {
     setValue(target.value)
   }
 
+  const handleKeyDown = e => {
+    if (e.which == 190) {
+      e.preventDefault()
+    }
+  }
+
   useEffect(() => {
     setValue(formatCurrency(props.value))
   }, [props.value])
@@ -38,6 +44,7 @@ export const CurrencyInput = props => {
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
         endAdornment={<InputAdornment position="end">€</InputAdornment>}
       />
     </FormControl>
