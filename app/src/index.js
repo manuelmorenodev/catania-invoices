@@ -6,6 +6,7 @@ import { appFeature } from './app'
 import { customersFeature } from './features/customers'
 import { invoicesFeature } from './features/invoices'
 import { productsFeature } from './features/products'
+import { loginFeature } from './features/login'
 import { apolloService } from './services/apollo'
 import { dateNfsService } from './services/date-nfs'
 
@@ -22,5 +23,11 @@ runHookApp({
     },
   },
   services: [reactRoot, reactRouter, reactMUI, apolloService, dateNfsService],
-  features: [appFeature, invoicesFeature, customersFeature, productsFeature],
+  features: [
+    appFeature,
+    invoicesFeature,
+    customersFeature,
+    productsFeature,
+    loginFeature,
+  ],
 })

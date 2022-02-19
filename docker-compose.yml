@@ -52,6 +52,8 @@ services:
     environment:
       - HASURA_ENDPOINT=http://hasura:8080/v1/graphql
       - FASTIFY_PORT=80
+      - JWT_SECRET=${HASURA_JWT_SECRET:-h2leOvdgjwpV0As5L8rZlV3VDVOsOmwk}
+      - JWT_DURATION=5m
 
   tdd-unit:
     image: node:16

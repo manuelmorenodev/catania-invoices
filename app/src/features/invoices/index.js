@@ -1,5 +1,6 @@
 import { Invoices } from './components/Invoices'
 import { Invoice } from './components/Invoice'
+import DescriptionIcon from '@mui/icons-material/Description'
 
 export const invoicesFeature = ({ registerAction }) => {
   registerAction({
@@ -7,14 +8,6 @@ export const invoicesFeature = ({ registerAction }) => {
     handler: {
       path: '/invoices',
       element: <Invoices />,
-    },
-  })
-
-  registerAction({
-    hook: 'addMenuItem',
-    handler: {
-      path: '/invoices',
-      label: 'Invoices',
     },
   })
 
@@ -29,8 +22,9 @@ export const invoicesFeature = ({ registerAction }) => {
   registerAction({
     hook: 'addMenuItem',
     handler: {
-      path: '/invoice',
-      label: 'Invoice',
+      path: '/invoices',
+      label: 'Invoices',
+      icon: <DescriptionIcon />,
     },
   })
 }

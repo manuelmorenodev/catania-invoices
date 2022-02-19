@@ -1,3 +1,4 @@
+import CategoryIcon from '@mui/icons-material/Category'
 import { Product } from './components/Product'
 import { Products } from './components/Products'
 
@@ -13,7 +14,7 @@ export const productsFeature = ({ registerAction }) => {
   registerAction({
     hook: 'addRoute',
     handler: {
-      path: '/product/',
+      path: '/product',
       element: <Product />,
     },
   })
@@ -31,6 +32,7 @@ export const productsFeature = ({ registerAction }) => {
     handler: {
       path: '/products',
       label: 'Products',
+      icon: <CategoryIcon />,
     },
   })
 }

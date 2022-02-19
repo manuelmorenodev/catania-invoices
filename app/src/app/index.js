@@ -1,3 +1,4 @@
+import HomeIcon from '@mui/icons-material/Home'
 import { App } from './App.js'
 import { HomePage } from './HomePage.js'
 
@@ -31,6 +32,7 @@ export const appFeature = ({ registerAction }) => {
     handler: {
       path: '/',
       label: 'Home',
+      icon: <HomeIcon />,
     },
   })
 

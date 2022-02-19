@@ -11,6 +11,9 @@
           name: invoices
 - table:
     schema: public
+    name: identity_tokens
+- table:
+    schema: public
     name: invoices
   object_relationships:
   - name: customer
@@ -30,3 +33,9 @@
 - table:
     schema: public
     name: products
+- table:
+    schema: public
+    name: tenants
+- table:
+    schema: public
+    name: users
