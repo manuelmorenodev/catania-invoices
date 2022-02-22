@@ -1,7 +1,6 @@
-version: "3.8"
+version: '3.8'
 
 services:
-
   postgres:
     image: postgres:13.5
     environment:
@@ -9,7 +8,7 @@ services:
     volumes:
       - .docker/pg:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 10s
       timeout: 5s
       retries: 20
@@ -20,14 +19,14 @@ services:
       postgres:
         condition: service_healthy
     ports:
-      - "${HASURA_PORT:-8080}:8080"
+      - '${HASURA_PORT:-8080}:8080'
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
-      HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_ADMIN_SECRET:-hasura}"
+      HASURA_GRAPHQL_ADMIN_SECRET: '${HASURA_ADMIN_SECRET:-hasura}'
       HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256", "key": "${HASURA_JWT_SECRET:-h2leOvdgjwpV0As5L8rZlV3VDVOsOmwk}"}'
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "admin"
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
-      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'admin'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+      HASURA_GRAPHQL_DEV_MODE: 'true'
 
   app:
     # image: node:16
@@ -62,4 +61,4 @@ services:
     volumes:
       - ./api:/api:delegated
     working_dir: /api
-    entrypoint: ["npm", "run", "tdd:unit"]
+    entrypoint: ['npm', 'run', 'tdd:unit']
