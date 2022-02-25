@@ -17,7 +17,7 @@ runHookApp({
         config: {
           uri:
             process.env.REACT_APP_HASURA_ENDPOINT ||
-            'http://localhost:9876/v1/graphql',
+            `http://localhost:9898/v1/graphql`,
         },
       },
     },

@@ -1,7 +1,5 @@
 import { useGetContext } from '@forrestjs/react-root'
-import MailIcon from '@mui/icons-material/Mail'
 import MenuIcon from '@mui/icons-material/Menu'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -55,7 +53,7 @@ export const App = props => {
   )
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', height: '100%' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -118,18 +116,20 @@ export const App = props => {
       </Box>
       <Box
         component="main"
+        className="expand"
         sx={{
-          flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
         <Toolbar />
-        <Routes>
-          {routes.map(route => (
-            <Route {...route} key={route.path} />
-          ))}
-        </Routes>
+        <Box className="expand">
+          <Routes>
+            {routes.map(route => (
+              <Route {...route} key={route.path} />
+            ))}
+          </Routes>
+        </Box>
       </Box>
     </Box>
   )

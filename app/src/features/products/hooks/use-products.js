@@ -15,8 +15,9 @@ const QUERY_GET_PRODUCTS = gql`
 
 export const useProducts = () => {
   const [products, setProducts] = useState([])
-  const { data, loading, error } = useQuery(QUERY_GET_PRODUCTS, {
-    pollInterval: 500,
+  const { data, loading, error, refetch } = useQuery(QUERY_GET_PRODUCTS, {
+    pollInterval: 0,
+    fetchPolicy: 'no-cache',
   })
 
   useEffect(() => {
@@ -25,5 +26,5 @@ export const useProducts = () => {
     }
   }, [data])
 
-  return { products, loading, error }
+  return { products, loading, error, refetch }
 }

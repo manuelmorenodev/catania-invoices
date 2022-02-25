@@ -1,6 +1,7 @@
 import HomeIcon from '@mui/icons-material/Home'
 import { App } from './App.js'
 import { HomePage } from './HomePage.js'
+import './styles.css'
 
 export const appFeature = ({ registerAction }) => {
   registerAction({

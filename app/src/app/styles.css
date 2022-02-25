@@ -1,0 +1,11 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.expand {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}

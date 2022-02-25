@@ -8,7 +8,7 @@ services:
     volumes:
       - .docker/pg:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      test: [ 'CMD-SHELL', 'pg_isready -U postgres' ]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -28,18 +28,18 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
       HASURA_GRAPHQL_DEV_MODE: 'true'
 
-  app:
-    # image: node:16
-    build:
-      context: app
-    ports:
-      - ${APP_PORT-80}:80 # browser
-      - 3000:80 # live reload
-    volumes:
-      - ./app:/app
-    environment:
-      # - PORT=80
-      - REACT_APP_HASURA_ENDPOINT=http://localhost:${HASURA_PORT:-8080}/v1/graphql
+  # app:
+  #   # image: node:16
+  #   build:
+  #     context: app
+  #   ports:
+  #     - ${APP_PORT-80}:3000 # browser
+  #     - 3000:3000 # live reload
+  #   volumes:
+  #     - ./app:/app
+  #   environment:
+  #     # - PORT=80
+  #     - REACT_APP_HASURA_ENDPOINT=http://localhost:${HASURA_PORT:-8080}/v1/graphql
 
   api:
     build:
@@ -54,11 +54,11 @@ services:
       - JWT_SECRET=${HASURA_JWT_SECRET:-h2leOvdgjwpV0As5L8rZlV3VDVOsOmwk}
       - JWT_DURATION=5m
 
-  tdd-unit:
-    image: node:16
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./api:/api:delegated
-    working_dir: /api
-    entrypoint: ['npm', 'run', 'tdd:unit']
+  # tdd-unit:
+  #   image: node:16
+  #   environment:
+  #     - NODE_ENV=development
+  #   volumes:
+  #     - ./api:/api:delegated
+  #   working_dir: /api
+  #   entrypoint: ['npm', 'run', 'tdd:unit']
